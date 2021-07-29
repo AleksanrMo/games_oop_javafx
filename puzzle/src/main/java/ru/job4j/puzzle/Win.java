@@ -4,7 +4,7 @@ public class Win {
     public static boolean check(int[][] board) {
         boolean rsl = false;
         if (vertical(board) || horizontal(board)) {
-                rsl = true;
+            rsl = true;
         }
 
         return rsl;
@@ -19,7 +19,7 @@ public class Win {
                     sum += 1;
                 }
             }
-            if(sum == 5) {
+            if (sum == 5) {
                 result = true;
                 break;
             }
@@ -38,24 +38,13 @@ public class Win {
                     sum += 1;
                     point = j;
                     break;
+                }
             }
-            }
-            if(sum == 5) {
+            if (sum == 5) {
                 result = true;
                 break;
             }
         }
         return result;
-    }
-
-    public static void main(String[] args) {
-        int[][] board = {
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-        };
-        System.out.println(check(board));
     }
 }
