@@ -3,10 +3,12 @@ package ru.job4j.puzzle;
 public class Win {
     public static boolean check(int[][] board) {
         boolean rsl = false;
-        if (monoHorizontal(board, 2) || monoVertical( board, 2)) {
-            rsl = true;
+        for (int index = 0; index < board.length; index++) {
+            if (board[index][index] == 1 && (monoHorizontal(board, index) || monoVertical(board, index))) {
+                rsl = true;
+                break;
+            }
         }
-
         return rsl;
     }
 
