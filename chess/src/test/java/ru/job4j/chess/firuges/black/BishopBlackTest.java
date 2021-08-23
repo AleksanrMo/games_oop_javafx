@@ -1,25 +1,38 @@
 package ru.job4j.chess.firuges.black;
 
-import junit.framework.TestCase;
-//import org.junit.Assert;
-import org.junit.Assert;
+import org.junit.Test;
+import ru.job4j.chess.ImpossibleMoveException;
 import ru.job4j.chess.firuges.Cell;
-//import org.junit.Test;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 
 
-public class BishopBlackTest extends TestCase {
-
+public class BishopBlackTest {
+    @Test
     public void testPosition() {
         BishopBlack one =  new BishopBlack(Cell.F8);
-        Cell expected = Cell.F8;
-        Assert.assertEquals(one.position(), expected);
+        assertThat(one.position(), is (Cell.F8));
     }
-
+    @Test
     public void testCopy() {
         BishopBlack second = new BishopBlack(Cell.F5);
-        Cell expected = Cell.F5;
-        Assert.assertEquals(second.position(), expected);
+       assertThat(second.copy(Cell.F5).position(), is(Cell.F5));
     }
+
+    @Test
+    public void testisDiagonal() {
+        BishopBlack bishopBlack = new BishopBlack(Cell.C2);
+        boolean check = bishopBlack.isDiagonal(bishopBlack.position(), Cell.E4);
+        assertThat(check, is(true));
+    }
+
+    @Test
+    public void testWay() throws ImpossibleMoveException {
+       BishopBlack bishopBlack = new BishopBlack(Cell.C2);
+       Cell[] array = bishopBlack.way(Cell.E4);
+       Cell[] expected = {Cell.D3, Cell.E4};
+       assertThat(expected, is(array));
+    }
+
 }
