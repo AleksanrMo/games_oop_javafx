@@ -6,14 +6,14 @@ import ru.job4j.chess.firuges.Cell;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-
-
 public class BishopBlackTest {
+
     @Test
     public void testPosition() {
         BishopBlack one =  new BishopBlack(Cell.F8);
-        assertThat(one.position(), is (Cell.F8));
+        assertThat(one.position(), is(Cell.F8));
     }
+
     @Test
     public void testCopy() {
         BishopBlack second = new BishopBlack(Cell.F5);
@@ -34,5 +34,4 @@ public class BishopBlackTest {
        Cell[] expected = {Cell.D3, Cell.E4};
        assertThat(expected, is(array));
     }
-
 }
