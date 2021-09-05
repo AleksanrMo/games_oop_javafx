@@ -1,5 +1,6 @@
 package ru.job4j.chess.firuges.black;
 
+import ru.job4j.chess.FigureNotFoundException;
 import ru.job4j.chess.ImpossibleMoveException;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
@@ -17,36 +18,32 @@ public class BishopBlack implements Figure {
     }
 
     @Override
-    public Cell[] way(Cell dest) {
+    public Cell[] way(Cell dest) throws ImpossibleMoveException {
         if (!isDiagonal(position, dest)) {
-            throw new ImpossibleMoveException(
-                    String.format("Could not move by diagonal from %s to %s",
-                            position, dest)
-            );
+            throw new ImpossibleMoveException(String.format("Could not way by diagonal from %s to %s", position, dest));
         }
-        int size = Math.abs(dest.getX() - position.getX());
-        Cell[] steps = new Cell[size];
-        int x = this.position.getX();
-        int y = this.position.getY();
-        int deltaX = (dest.getX() - position.getX()) > 0 ? 1 : -1;
-        int deltaY = (dest.getY() - position.getY()) > 0 ? 1 : -1;
-        for (int index = 0; index < size; index++) {
-            x += deltaX;
-            y += deltaY;
-            steps[index] = Cell.findBy(x, y);
+        int currentX = position.getX();
+        int currentY = position.getY();
+        int destX = dest.getX();
+        int destY = dest.getY();
+        int size = Math.abs(currentX - destX);
+        Cell[] result = new Cell[size];
+        int deltaX = destX > currentX ? 1 : -1;
+        int deltaY = destY > currentY ? 1 : -1;
+        for (int i = 0; i < size; i++) {
+            currentX += deltaX;
+            currentY += deltaY;
+            result[i] = Cell.findBy(currentX, currentY);
         }
-        return steps;
+        return result;
     }
 
     public boolean isDiagonal(Cell source, Cell dest) {
-        return Math.abs(dest.getX() - source.getX()) == Math.abs(dest.getY()
-                - source.getY());
+        return Math.abs((source.getX() - dest.getX())) == Math.abs(source.getY() - dest.getY());
     }
 
     @Override
     public Figure copy(Cell dest) {
         return new BishopBlack(dest);
     }
-
-
 }
